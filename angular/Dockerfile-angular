@@ -7,7 +7,7 @@ WORKDIR /usr/apps
 RUN ng new ng-app
 WORKDIR /usr/apps/ng-app
 # Install all the dependencies
-COPY ./app.component.html src/app
+COPY ./app.component-angular.html src/app
 RUN npm install
 
 # Serve the application
