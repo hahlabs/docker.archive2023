@@ -38,13 +38,13 @@ server {
         #
         # include snippets/snakeoil.conf;
 
-        root /var/www/edudate-view;
+        root /var/www/hahlabs-view;
         error_page 404 /index.html;
         charset utf-8;
         # Add index.php to the list if you are using PHP
-        index index.html index.php;
+        index index.html;
 
-        server_name edudate-view;
+        server_name hahlabs-view;
 
         location / {
                 # First attempt to serve request as file, then
