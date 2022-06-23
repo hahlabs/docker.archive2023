@@ -60,6 +60,3 @@ apt install -y \
 make
 echo "N" | make test
 make install
-cp /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/www.conf
-cp sapi/fpm/php-fpm /usr/local/bin
-cp sapi/fpm/php-fpm.conf /usr/local/etc
