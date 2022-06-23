@@ -46,7 +46,7 @@ server {
         # Add index.php to the list if you are using PHP
         index index.html index.php;
 
-        server_name edudate-app;
+        server_name hahlabs-app;
 
         location / {
                 # First attempt to serve request as file, then

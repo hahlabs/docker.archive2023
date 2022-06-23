@@ -3,7 +3,7 @@ LABEL version.php="8.1.7" \
       version.ubuntu="20.04-lts" \
       version.grpc="1.46.3" \
       version.composer="2.0" \
-      version.hahlabs-app="alpha-0.01.05"
+      version.hahlabs-app="alpha-0.01.06"
 # Setup workspace
 WORKDIR /home/hahlabs
 # copy build scripts & prepare
@@ -13,11 +13,13 @@ RUN files/upgrade-os.sh \
     && files/create-user.sh \
     && cp files/startup.sh /usr/local/bin
 # extract, compile and build php 8.1.7
-RUN files/compile-deply-php-nginx.sh 
+RUN files/compile-deply-php.sh 
 #install composer 2
 RUN files/install-composer.sh 
 # compile & install grpc
 RUN files/build-grpc.sh
+# Setup NGINX virtual host 
+RUN files/setup-hahlabs-virtual-host.sh
 USER hahlabs
 ENTRYPOINT sudo startup.sh && bash
 # 8082 : NGINX virtual host edudate-app: http://localhost:8082
