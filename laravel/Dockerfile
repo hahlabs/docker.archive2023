@@ -3,7 +3,7 @@ LABEL version.php="8.1.7" \
       version.ubuntu="20.04-lts" \
       version.grpc="1.46.3" \
       version.composer="2.0" \
-      version.hahlabs-app="alpha-0.01.06"
+      version.hahlabs-app="alpha-0.01.07"
 # Setup workspace
 WORKDIR /home/hahlabs
 # copy build scripts & prepare
@@ -25,4 +25,4 @@ ENTRYPOINT sudo startup.sh && bash
 # 8082 : NGINX virtual host edudate-app: http://localhost:8082
 # 9000 : php-fpm port -used internally
 # 8000 : php artisan serve --host=0.0.0.0 --port=8000 || php -S 0.0.0.0:8000 
-EXPOSE  8082 8000
+EXPOSE  8082 8000 9003
