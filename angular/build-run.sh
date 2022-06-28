@@ -3,7 +3,7 @@
 . docker-build.sh
 
 docker build -t $IMAGE_TAG .
-docker run -ditp 4200:4200 -p 8081:8081 -p 9005:9005\
+docker run -ditp 4200:4200 -p 8101:8101 -p 9005:9005\
      -w /home/hahlabs \
      --name $CONTAINER_NAME $IMAGE_TAG
 

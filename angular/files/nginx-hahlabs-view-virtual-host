@@ -19,8 +19,8 @@
 # Default server configuration
 #
 server {
-        listen 8081;
-        listen [::]:8081;
+        listen 8101;
+        listen [::]:8101;
 
         # SSL configuration
         #

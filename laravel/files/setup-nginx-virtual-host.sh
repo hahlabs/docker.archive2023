@@ -8,5 +8,5 @@ cp files/nginx-hahlabs-app-virtual-host /etc/nginx/sites-available/hahlabs-app
 ln -s /etc/nginx/sites-available/hahlabs-app /etc/nginx/sites-enabled/hahlabs-app 
 ln -s /home/hahlabs/hahlabs-app /var/www/hahlabs-app
 cp files/nginx.index.html /var/www/hahlabs-app/public/index-test.html 
-cp files/index.php /var/www/hahlabs-app/public/index-test.php 
+cp files/phpinfo.php /var/www/hahlabs-app/public/phpinfo.php 
 rm /etc/nginx/sites-enabled/default

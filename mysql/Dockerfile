@@ -1,4 +1,7 @@
 FROM ubuntu
+LABEL version.mysql="8.x" \
+      version.ubuntu="20.04-lts" \
+      version.hahlabs-mysql="alpha-0.01.09"
 # Update, Upgrade, install packages
 RUN apt update \
    && apt -y upgrade \
@@ -8,18 +11,7 @@ RUN apt update \
 
 WORKDIR /home/hahlabs
 COPY files/. files/
-RUN mkdir /home/mysql \
-  && usermod -d /home/mysql mysql \
-  && chown mysql:mysql /home/mysql \
-  && chmod g+rwx /var/run/mysqld \
-  && cp files/.bashrc . \
-  && cp files/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf \
-  && groupadd --gid 1000 hahlabs \
-  && useradd --home-dir /home/hahlabs --gid 1000 --uid 1000 --groups sudo,mysql hahlabs \
-  && usermod -aG sudo root  \
-  && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
-  && chown -R hahlabs:hahlabs /home/hahlabs \
-  && exit
+RUN files/setup-mysql-user.sh
 
 # Adjust user root privileges, allow remote connections for root
 RUN service mysql restart && mysql  < files/root-user.sql 
