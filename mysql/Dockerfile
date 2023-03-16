@@ -1,7 +1,7 @@
-FROM ubuntu
+FROM ubuntu:latest
 LABEL version.mysql="8.x" \
-      version.ubuntu="20.04-lts" \
-      version.hahlabs-mysql="alpha-0.01.09"
+      version.ubuntu="22.04-lts" \
+      version.hahlabs-mysql="alpha-0.02.00"
 # Update, Upgrade, install packages
 RUN apt update \
    && apt -y upgrade \

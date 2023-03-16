@@ -1,9 +1,9 @@
-FROM ubuntu
+FROM ubuntu:latest
 LABEL version.php="8.1.7" \
-      version.ubuntu="20.04-lts" \
+      version.ubuntu="22.04-lts" \
       version.grpc="1.46.3" \
       version.composer="2.0" \
-      version.hahlabs-laravel="alpha-0.01.09"
+      version.hahlabs-laravel="alpha-0.02.00"
 # Setup workspace
 WORKDIR /home/hahlabs
 # copy build scripts & prepare

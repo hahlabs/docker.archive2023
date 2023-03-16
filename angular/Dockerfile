@@ -1,10 +1,10 @@
-FROM ubuntu
-LABEL version.angular="13-lts" \
-      version.ubuntu="20.04-lts" \
+FROM ubuntu:latest
+LABEL version.angular="14-lts" \
+      version.ubuntu="22.04-lts" \
       version.firebase="9.1.0" \
       version.nvm="8" \
       version.npm="16" \
-      version.hahlabs-angular="alpha-0.01.05"
+      version.hahlabs-angular="alpha-0.02.00"
 
 # Update, Upgrade, install packages
 USER root

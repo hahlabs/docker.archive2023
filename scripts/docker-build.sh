@@ -1,3 +1,7 @@
+# usage docker-build.sh <tag> <- default "wip"
+# source file, to source .env in local environment that set $DOCKER_ID, $IMAGE_NAME
+# build typical tag $DOCKER_ID/$IMAGE_NAME:wip
+
 . .env
 if [ -z "$1" ] 
 then 
