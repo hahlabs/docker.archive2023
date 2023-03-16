@@ -5,7 +5,7 @@ LABEL version.mysql="8.x" \
 # Update, Upgrade, install packages
 RUN apt update \
    && apt -y upgrade \
-   && apt install -y mysql-server sudo
+   && apt install -y mysql-server sudo vim
 
 # Setup ops user use defaults uid 1000 gid 1000
 

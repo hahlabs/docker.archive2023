@@ -10,7 +10,7 @@ LABEL version.angular="13-lts" \
 USER root
 RUN apt update \
  && apt -y upgrade \
- && apt install -y nginx curl npm sudo 
+ && apt install -y nginx curl npm sudo vim
 
 
  # Setup home directory workspace
