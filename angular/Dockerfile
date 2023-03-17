@@ -4,7 +4,7 @@ LABEL version.angular="14-lts" \
       version.firebase="9.1.0" \
       version.nvm="8" \
       version.npm="16" \
-      version.hahlabs-angular="alpha-0.02.00"
+      version.hahlabs-angular="alpha-00.02.01"
 
 # Update, Upgrade, install packages
 USER root
@@ -28,4 +28,8 @@ RUN files/install-angular.sh
      
 RUN files/install-firebase.sh
 ENTRYPOINT sudo service nginx start && bash
+
+# 8101 : NGINX with default virtual host to intial Angular project
+# 4200 : ng serve
+# 9005 : Debugger port
 EXPOSE 8101 4200 9005
