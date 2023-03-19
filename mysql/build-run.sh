@@ -6,4 +6,4 @@ docker run -ditp 3306:3306 \
      -w /home/hahlabs \
      --name mysql-db hahlabs/mysql:wip
 
-docker exec -it `docker ps -q -l` "/bin/bash"
+docker exec -it `docker ps -lq` /bin/bash

@@ -4,7 +4,8 @@ LABEL version.angular="14-lts" \
       version.firebase="9.1.0" \
       version.nvm="8" \
       version.npm="16" \
-      version.hahlabs-angular="alpha-00.02.01"
+      version.hahlabs-angular="alpha-00.02.02" \
+      version.description="Timezone setup"
 
 # Update, Upgrade, install packages
 USER root
@@ -12,7 +13,8 @@ RUN apt update \
  && apt -y upgrade \
  && apt install -y nginx curl npm sudo vim
 
-
+ENV TZ="America/Vancouver"
+RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdata && ln -fs /usr/share/zoneinfo/America/Vancouver /etc/localtime
  # Setup home directory workspace
 WORKDIR /home/hahlabs
 COPY files/. files/

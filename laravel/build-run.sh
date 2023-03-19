@@ -6,4 +6,4 @@ docker run -ditp 8201:8201 \
      -w /home/hahlabs  \
      --name $CONTAINER_NAME $IMAGE_TAG "/bin/bash"
 
-docker exec -it `docker ps -q -l` "/bin/bash"
+docker exec -it `docker ps -lq` /bin/bash

@@ -3,7 +3,8 @@ LABEL version.php="8.1.7" \
       version.ubuntu="22.04-lts" \
       version.grpc="1.46.3" \
       version.composer="2.0" \
-      version.hahlabs-laravel="alpha-00.02.01"
+      version.hahlabs-laravel="alpha-00.02.04" \
+      version.description="Timezone set, xdebug php.ini port 9030"
 # Setup workspace
 WORKDIR /home/hahlabs
 # copy build scripts & prepare
@@ -13,7 +14,8 @@ RUN files/upgrade-os.sh \
     && files/create-user.sh \
     && cp files/php-fpm-service /usr/local/bin \
     && cp files/startup.sh /usr/local/bin
-
+ENV TZ="America/Vancouver"
+RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdata && ln -fs /usr/share/zoneinfo/America/Vancouver /etc/localtime
 
 # extract, compile and build php 8.1.7
 RUN files/build-php.sh 
@@ -29,7 +31,7 @@ USER hahlabs
 ENTRYPOINT sudo startup.sh && bash
 # 8201  : NGINX virtual host edudate-app: http://localhost:8082
 # 9000 : php-fpm port -used internally - no need to expose
-# 8010 : php artisan serve --host=0.0.0.0 --port=8010 || php -S 0.0.0.0:8010 
-# 9003 : XDebugger
+# 8210 : php artisan serve --host=0.0.0.0 --port=8010 || php -S 0.0.0.0:8010 
+# 9003 : XDebugger, internal should not be exposed, VSCode will report port in use error if exposed
 
-EXPOSE  8201 8010 9003
+EXPOSE  8201 8210 

@@ -1,12 +1,13 @@
 FROM ubuntu:latest
 LABEL version.mysql="8.x" \
       version.ubuntu="22.04-lts" \
-      version.hahlabs-mysql="alpha-00.02.01"
+      version.hahlabs-mysql="alpha-00.02.02"
 # Update, Upgrade, install packages
 RUN apt update \
    && apt -y upgrade \
    && apt install -y mysql-server sudo vim
-
+ENV TZ="America/Vancouver"
+RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdata && ln -fs /usr/share/zoneinfo/America/Vancouver /etc/localtime
 # Setup ops user use defaults uid 1000 gid 1000
 
 WORKDIR /home/hahlabs
