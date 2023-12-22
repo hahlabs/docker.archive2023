@@ -9,6 +9,6 @@ then
 else
   IMAGE_TAG=$DOCKER_ID/$IMAGE_NAME:$1
 fi
-
+echo "Building image:" $IMAGE_TAG
 docker build -t $IMAGE_TAG .
-export IMAGE_TAG
+export IMAG
