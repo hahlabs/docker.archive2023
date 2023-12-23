@@ -1,3 +1,3 @@
 #!/bin/bash
-systemctl start php-fpm 
+service php8.2-fpm start 
 service nginx start 
