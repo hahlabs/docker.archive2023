@@ -1,13 +1,12 @@
 #!/bin/bash
 #usage ./buid-run.sh <image-tag>  ex/ alpha-0.1.12 or lts-3
-docker system prune -f
+# docker system prune -f
 docker rm -f $(docker ps -a -q)
 ../scripts/docker-build.sh
 . .env
 echo "Docker container:" $CONTAINER_NAME $IMAGE_TAG
-docker run -ditp 8201:8201  -p 8202:8202\
+docker run -ditp 8201:8201   -p 8210:8210 \
      -w /home/hahlabs  \
-     --privileged --cap-add=ALL \
      --mount type=bind,source="$(pwd)",target=/app  \
      --name $CONTAINER_NAME $IMAGE_TAG "/bin/bash"
 

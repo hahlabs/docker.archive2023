@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -sL https://firebase.tools | bash
+sudo npm install -g firebase-tools
