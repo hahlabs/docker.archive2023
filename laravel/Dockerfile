@@ -4,7 +4,7 @@ LABEL version.php="8.2.14" \
       version.ubuntu="22.04-lts" \
       version.grpc="1.60.0" \
       version.composer="2.6.6" \
-      version.hahlabs-laravel="alpha-00.03.01" \
+      version.hahlabs-laravel="alpha-00.03.02" \
       version.description="Rebuild for 22.04 & php8.x - Laravel 10.x"
 
 WORKDIR /home/hahlabs

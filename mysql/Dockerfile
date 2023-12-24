@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 LABEL version.mysql="8.2" \
       version.ubuntu="22.04-lts" \
-      version.hahlabs-mysql="alpha-00.03.01"
+      version.hahlabs-mysql="alpha-00.03.02"
 # Update, Upgrade, install packages
 RUN apt -y update \
    && apt -y upgrade \
@@ -14,7 +14,8 @@ COPY files/. files/
 RUN files/setup-mysql-user.sh
 
 # Adjust user root privileges, allow remote connections for root
-RUN service mysql restart && mysql  < files/root-user.sql 
+RUN service mysql restart \
+     && mysql  < files/root-user.sql 
 RUN rm -rf files
 USER hahlabs
 

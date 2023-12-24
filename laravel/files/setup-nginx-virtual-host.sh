@@ -1,9 +1,17 @@
 #!/bin/bash
-# configure nginx - edudate-app virtual host
+# configure nginx - edudate-app virtual host, 
 
 composer create-project laravel/laravel hahlabs-app
-chmod -R gou+rwx hahlabs-app/storage
+mkdir -p /var/storage/hahlabs-app/framework/sessions
+mkdir -p /var/storage/hahlabs-app/framework/views
+
+
+chown -R www-data:www-data /var/storage
+
 chown -R hahlabs:hahlabs hahlabs-app
+rm -rf /home/hahlabs/hahlabs-app/storage
+ln -sf /var/storage/hahlabs-app /home/hahlabs/hahlabs-app/storage
+
 cp files/nginx-hahlabs-app-virtual-host /etc/nginx/sites-available/hahlabs-app 
 ln -s /etc/nginx/sites-available/hahlabs-app /etc/nginx/sites-enabled/hahlabs-app 
 ln -s /home/hahlabs/hahlabs-app /var/www/hahlabs-app

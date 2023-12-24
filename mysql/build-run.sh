@@ -6,7 +6,6 @@ docker rm -f $(docker ps -a -q)
 . .env
 echo "Docker container:" $CONTAINER_NAME $IMAGE_TAG
 docker run -ditp 3306:3306 \
-     -w /home/hahlabs \
      --name $CONTAINER_NAME $IMAGE_TAG
 
 docker exec -it `docker ps | sed -n /$CONTAINER_NAME/p  | sed -e 's/\(^[[:xdigit:]]\{12\}\).*$/\1/g'` /bin/bash
