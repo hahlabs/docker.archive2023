@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 LABEL version.mysql="8.2" \
       version.ubuntu="22.04-lts" \
-      version.hahlabs-mysql="alpha-00.04.01"
+      version.hahlabs-mysql="alpha-00.04.02"
 # Update, Upgrade, install packages
 RUN apt -y update \
    && apt -y upgrade \
@@ -17,6 +17,7 @@ RUN files/setup-mysql-user.sh
 RUN mkdir /var/run/sshd
 RUN echo 'root:HAH7A85@#!' | chpasswd
 RUN sed -Ei 's/#(PermitRootLogin).+/\1 yes/' /etc/ssh/sshd_config
+RUN sed -Ei 's/#Port 22/Port 8022/' /etc/ssh/sshd_config
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
@@ -30,6 +31,6 @@ RUN service mysql restart \
 RUN rm -rf files
 USER hahlabs
 
-EXPOSE 3306 22
+EXPOSE 3306 8022
 # Enables the service on docker run container
 ENTRYPOINT sudo ./start-services.sh && bash
