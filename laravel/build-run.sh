@@ -5,7 +5,7 @@ docker rm -f $(docker ps -a -q)
 ../scripts/docker-build.sh
 . .env
 echo "Docker container:" $CONTAINER_NAME $IMAGE_TAG
-docker run -ditp 8201:8201   -p 8210:8210 \
+docker run -dit \
      -w /home/hahlabs  \
      --mount type=bind,source="$(pwd)",target=/app  \
      --name $CONTAINER_NAME $IMAGE_TAG "/bin/bash"

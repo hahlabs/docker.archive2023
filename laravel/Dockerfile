@@ -4,7 +4,7 @@ LABEL version.php="8.2.14" \
       version.ubuntu="22.04-lts" \
       version.grpc="1.60.0" \
       version.composer="2.6.6" \
-      version.hahlabs-laravel="alpha-00.03.02" \
+      version.hahlabs-laravel="alpha-00.04.00" \
       version.description="Rebuild for 22.04 & php8.x - Laravel 10.x"
 
 WORKDIR /home/hahlabs
@@ -21,7 +21,18 @@ RUN files/setup-nginx-virtual-host.sh
 # Setup workspace
 
 WORKDIR /home/hahlabs
-RUN cp files/startup.sh /home/hahlabs && chown hahlabs:hahlabs startup.sh && rm -rf files
+RUN cp files/startup.sh /home/hahlabs \
+    && chown hahlabs:hahlabs startup.sh \
+    && rm -rf files
+
+#SSH Services
+RUN mkdir /var/run/sshd
+RUN echo 'root:HAH7A85@#!' | chpasswd
+RUN sed -Ei 's/#(PermitRootLogin).+/\1 yes/' /etc/ssh/sshd_config
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
 USER hahlabs
 # 80    : NGINX virtual host default: http://localhost:80 <-- removed
 # 8201  : NGINX virtual host hahlabs app: http://localhost:8201
