@@ -13,7 +13,7 @@ COPY files/. files/
 RUN apt -y update && apt -y upgrade
 # has to be after update/upgrade commands
 RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdata && ln -fs /usr/share/zoneinfo/America/Vancouver /etc/localtime
-RUN files/install-php.sh
+RUN files/install-tools.sh
 RUN files/create-user.sh
 RUN files/install-composer.sh
 RUN files/build-grpc.sh
