@@ -14,21 +14,15 @@ COPY files/. files/
 RUN files/setup-mysql-user.sh
 
 #SSH Services
-RUN mkdir /var/run/sshd
-RUN echo 'root:HAH7A85@#!' | chpasswd
-RUN sed -Ei 's/#(PermitRootLogin).+/\1 yes/' /etc/ssh/sshd_config
-RUN sed -Ei 's/#Port 22/Port 8022/' /etc/ssh/sshd_config
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
+RUN files/setup-ssh-server.sh
 
 # Adjust user root privileges, allow remote connections for root
 RUN service mysql restart \
      && mysql  < files/root-user.sql  \
      && cp files/start-services.sh /home/hahlabs \
-     && chown hahlabs:hahlabs /home/hahlabs/start-services.sh
-
-RUN rm -rf files
+     && chown hahlabs:hahlabs /home/hahlabs/start-services.sh \
+     && rm -rf files
+     
 USER hahlabs
 
 EXPOSE 3306 8022

@@ -12,7 +12,7 @@ LABEL version.angular="17.0.8" \
 USER root
 RUN apt -y update \
  && apt -y upgrade \
- && apt install -y nginx curl npm sudo vim
+ && apt install -y nginx curl npm sudo vim openssh-server
 
 ENV TZ="America/Vancouver"
 RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdata && ln -fs /usr/share/zoneinfo/America/Vancouver /etc/localtime
@@ -20,16 +20,9 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdat
 WORKDIR /home/hahlabs
 COPY files/. files/
 RUN files/setup-hahlabs-user.sh \
-   && files/setup-nginx-virtual-host.sh
+   && files/setup-nginx-virtual-host.sh \
+   && files/setup-ssh-server.sh 
 
-#SSH Services
-RUN mkdir /var/run/sshd
-RUN echo 'root:HAH7A85@#!' | chpasswd
-RUN sed -Ei 's/#(PermitRootLogin).+/\1 yes/' /etc/ssh/sshd_config
-RUN sed -Ei 's/#Port 22/Port 8122/' /etc/ssh/sshd_config
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
 USER hahlabs
 # Install nvm, load it, and install node --lts
 RUN files/install-nvm.sh

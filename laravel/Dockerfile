@@ -23,16 +23,10 @@ RUN files/setup-nginx-virtual-host.sh
 WORKDIR /home/hahlabs
 RUN cp files/startup.sh /home/hahlabs \
     && chown hahlabs:hahlabs startup.sh \
+    && files/setup-ssh-server.sh \
     && rm -rf files
 
-#SSH Services
-RUN mkdir /var/run/sshd
-RUN echo 'root:HAH7A85@#!' | chpasswd
-RUN sed -Ei 's/#(PermitRootLogin).+/\1 yes/' /etc/ssh/sshd_config
-RUN sed -Ei 's/#Port 22/Port 8222/' /etc/ssh/sshd_config
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
+
 
 USER hahlabs
 # 80    : NGINX virtual host default: http://localhost:80 <-- removed
