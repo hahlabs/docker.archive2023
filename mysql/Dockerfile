@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 LABEL version.mysql="8.2" \
       version.ubuntu="22.04-lts" \
-      version.hahlabs-mysql="alpha-00.04.00"
+      version.hahlabs-mysql="alpha-00.04.01"
 # Update, Upgrade, install packages
 RUN apt -y update \
    && apt -y upgrade \
@@ -23,10 +23,13 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Adjust user root privileges, allow remote connections for root
 RUN service mysql restart \
-     && mysql  < files/root-user.sql 
+     && mysql  < files/root-user.sql  \
+     && cp files/start-services.sh /home/hahlabs \
+     && chown hahlabs:hahlabs /home/hahlabs/start-services.sh
+
 RUN rm -rf files
 USER hahlabs
 
 EXPOSE 3306 22
 # Enables the service on docker run container
-ENTRYPOINT sudo service mysql restart && sudo service ssh start && bash
+ENTRYPOINT sudo ./start-services.sh && bash
