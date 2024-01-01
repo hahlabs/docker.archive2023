@@ -1,4 +1,5 @@
 #!/bin/bash
-service php8.2-fpm restart 
+service php8.2-fpm stop
 service nginx restart 
+service php8.2-fpm start
 service ssh restart
