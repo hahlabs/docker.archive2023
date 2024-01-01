@@ -13,4 +13,4 @@ docker run -ditp 4200:4200 -p 8101:8101 -p 9005:9005\
      --mount type=bind,source="$(pwd)",target=/app  \
      --name $CONTAINER_NAME $IMAGE_TAG
 
-docker exec -it `docker ps | sed -n /$CONTAINER_NAME/p  | sed -e 's/\(^[[:xdigit:]]\{12\}\).*$/\1/g'` /bin/bash
+# docker exec -it `docker ps | sed -n /$CONTAINER_NAME/p  | sed -e 's/\(^[[:xdigit:]]\{12\}\).*$/\1/g'` /bin/bash
