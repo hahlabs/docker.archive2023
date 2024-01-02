@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 LABEL version.mysql="8.2" \
       version.ubuntu="22.04-lts" \
-      version.hahlabs-mysql="alpha-00.04.06"
+      version.hahlabs-mysql="alpha-00.05.00"
 # Update, Upgrade, install packages
 RUN apt -y update \
    && apt -y upgrade \
@@ -11,20 +11,18 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdat
 # Setup ops user use defaults uid 15286 gid 15286
 WORKDIR /home/hahlabs
 COPY files/. files/
-RUN files/setup-mysql-user.sh
-
-#SSH Services
-RUN files/setup-ssh-server.sh
+RUN files/setup-mysql-user.sh \
+ && files/setup-ssh-server.sh
 
 # Adjust user root privileges, allow remote connections for root
 RUN service mysql restart \
      && mysql  < files/root-user.sql  \
-     && cp files/start-services.sh /home/hahlabs \
-     && chown hahlabs:hahlabs /home/hahlabs/start-services.sh \
+     && cp files/startup.sh /home/hahlabs \
+     && chown hahlabs:hahlabs /home/hahlabs/startup.sh \
      && rm -rf files
      
 USER hahlabs
 
 EXPOSE 3306 8022
 # Enables the service on docker run container
-ENTRYPOINT sudo ./start-services.sh && bash
+ENTRYPOINT sudo ./startup.sh && bash
