@@ -32,7 +32,7 @@
                 ],
                 "essential": true,
                 "entryPoint": [
-                    "/bin/sh", "-c" ,"/usr/bin/sudo ./start-services.sh && tail -f /dev/null"
+                    "/bin/sh", "-c" ,"/usr/bin/sudo ./startup.sh && tail -f /dev/null"
                 ],
                 "environment": [],
                 "mountPoints": [],
