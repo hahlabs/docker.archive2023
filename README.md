@@ -13,4 +13,12 @@ Highlights:
 # Build and Deploy to AWS ECS
 1. Configure environment variable DOCKER_DIR in aws-ecs
 2. Configure connection to AWS , aws configure
-3. create the file 
+3. create the file ~/docker-hahlabs-access-key.txt <- populate with DockerHub Access Key>
+4. run the script ./hahlabs-cicd.sh [build <tag>] , ex. ./hahlabs-cicd.sh build alpha-00.04.06
+  4.1 clear docker registry cache
+  4.2 run 3 builds for mysql, laravel, and angular
+  4.3 push 3 images to dockerhub registry
+  4.4 import 3 images to AWS ECR registry
+  4.5 create ECS task def
+  4.6 create ECS service
+  
