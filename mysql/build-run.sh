@@ -1,7 +1,5 @@
 #!/bin/bash
 #usage ./buid-run.sh <image-tag>  ex/ alpha-0.1.12 or lts-3
-docker rm -f $(docker ps -a -q)
-docker system prune -f
 
 ../scripts/docker-build.sh
 . .env
