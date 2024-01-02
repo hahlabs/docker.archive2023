@@ -5,7 +5,7 @@ LABEL version.angular="17.0.8" \
       version.nvm="0.39.7" \
       version.node.js="20.10.0-lts" \
       version.npm="10.2.3" \
-      version.hahlabs-angular="alpha-00.04.02" \
+      version.hahlabs-angular="alpha-00.04.06" \
       version.description="Ubuntu 22.04 - Angular 17"
 
 # Update, Upgrade, install packages
