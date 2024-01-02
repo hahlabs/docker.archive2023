@@ -7,4 +7,4 @@ echo "N" | ng version
 ng new hahlabs-view --defaults=true --interactive=false --package-manager="npm" --routing=true --style="scss" --skip-git=true 
 cd hahlabs-view 
 echo "N" | ng build 
-sudo cp -R ~/hahview/dist/hahview/browser/. /var/www/hahlabs-view
+sudo cp -R ~/hahlabs-view/dist/hahlabs-view/browser/. /var/www/hahlabs-view
