@@ -18,7 +18,7 @@ if [  "$1" = 'build' ]
  then 
    docker rm -f $(docker ps -aq) 
    docker image rm -f $(docker images -q) 
-   docker system prune -a
+   docker system prune -af
   echo "Docker cache cleared..."
    cd $DOCKER_DIR/aws-ecs
    cat ~/docker-hahlabs-access-key.txt | docker login --username hahlabs --password-stdin
@@ -26,7 +26,7 @@ if [  "$1" = 'build' ]
   echo "building ..."
   cd ../mysql && ../mysql/build-run.sh & \
   cd ../angular && ../angular/build-run.sh & \
-  cd ../laravel && ../laravel/build-run.sh ; fg
+  cd ../laravel && ../laravel/build-run.sh && fg
 
   # push 3 containers in multi-tasking 
   echo "tagging and push to dockerhub ..."
