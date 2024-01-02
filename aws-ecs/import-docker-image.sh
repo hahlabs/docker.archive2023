@@ -2,6 +2,7 @@
 docker logout
 docker rm -f $(docker ps -aq)
 docker image rm -f $(docker images -q)
+docker system prune -af
 set -m
 cat ~/docker-hahlabs-access-key.txt| docker login --username hahlabs --password-stdin
 docker pull -q hahlabs/mysql:dev & \
