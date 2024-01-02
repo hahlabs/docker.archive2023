@@ -1,6 +1,5 @@
 #!/bin/bash
 #usage ./buid-run.sh <image-tag>  ex/ alpha-0.1.12 or lts-3
-
 ../scripts/docker-build.sh
 . .env
 echo "Docker container:" $CONTAINER_NAME $IMAGE_TAG

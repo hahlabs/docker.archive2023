@@ -10,5 +10,4 @@ else
   IMAGE_TAG=$DOCKER_ID/$IMAGE_NAME:$1
 fi
 echo "Building image:" $IMAGE_TAG
-docker build -qt $IMAGE_TAG .
-export IMAG
+docker buildx -qt $IMAGE_TAG .

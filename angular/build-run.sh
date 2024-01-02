@@ -3,12 +3,12 @@
 
 # docker-build source .env and set up parameters
 # docker system prune -f
-docker rm -f $(docker ps -a -q)
+
 ../scripts/docker-build.sh
 . .env
 echo "Docker container:" $CONTAINER_NAME $IMAGE_TAG
 
-docker run -ditp 4200:4200 -p 8101:8101 -p 9005:9005\
+docker run -dit \
      -w /home/hahlabs \
      --mount type=bind,source="$(pwd)",target=/app  \
      --name $CONTAINER_NAME $IMAGE_TAG

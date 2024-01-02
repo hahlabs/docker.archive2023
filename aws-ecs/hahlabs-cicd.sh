@@ -7,14 +7,15 @@
 # ./hahlabs-cicd.sh [build <alpha-00.04.02>] : deployed task-def and creates a service, optionally builds and push 
 if [ -z $DOCKER_DIR ]
  then
+   echo "DOCKER_DIR is not set, using default"
    DOCKER_DIR=/projects/docker
 fi
 echo "DOCKER_DIR=$DOCKER_DIR"
 
 if [  "$1" = 'build' ]
  then 
-   docker rm -f $(docker ps -aq)
-   docker image rm -f $(docker images -q)
+   docker rm -f $(docker ps -aq) 
+   docker image rm -f $(docker images -q) 
    cd $DOCKER_DIR/aws-ecs
    cat ~/docker-hahlabs-access-key.txt | docker login --username hahlabs --password-stdin
   # build 3 containers in multi-tasking 
