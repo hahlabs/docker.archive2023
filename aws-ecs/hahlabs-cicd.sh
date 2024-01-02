@@ -13,6 +13,7 @@ echo "DOCKER_DIR=$DOCKER_DIR"
 
 if [  "$1" = 'build' ]
  then 
+   docker rm -f $(docker ps -aq)
    docker image rm -f $(docker images -q)
    cd $DOCKER_DIR/aws-ecs
    cat ~/docker-hahlabs-access-key.txt | docker login --username hahlabs --password-stdin
