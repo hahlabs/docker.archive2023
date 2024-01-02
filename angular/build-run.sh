@@ -8,9 +8,9 @@
 . .env
 echo "Docker container:" $CONTAINER_NAME $IMAGE_TAG
 
-docker run -dit \
-     -w /home/hahlabs \
-     --mount type=bind,source="$(pwd)",target=/app  \
-     --name $CONTAINER_NAME $IMAGE_TAG
+# docker run -dit \
+#      -w /home/hahlabs \
+#      --mount type=bind,source="$(pwd)",target=/app  \
+#      --name $CONTAINER_NAME $IMAGE_TAG
 
 # docker exec -it `docker ps | sed -n /$CONTAINER_NAME/p  | sed -e 's/\(^[[:xdigit:]]\{12\}\).*$/\1/g'` /bin/bash
