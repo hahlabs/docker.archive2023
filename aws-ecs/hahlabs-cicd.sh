@@ -11,22 +11,25 @@ if [ -z $DOCKER_DIR ]
    DOCKER_DIR=/projects/docker
 fi
 echo "DOCKER_DIR=$DOCKER_DIR"
+# Enable job control
+set -m
 
 if [  "$1" = 'build' ]
  then 
    docker rm -f $(docker ps -aq) 
    docker image rm -f $(docker images -q) 
+   docker system prune -a
   echo "Docker cache cleared..."
    cd $DOCKER_DIR/aws-ecs
    cat ~/docker-hahlabs-access-key.txt | docker login --username hahlabs --password-stdin
   # build 3 containers in multi-tasking 
   echo "building ..."
   cd ../mysql && ../mysql/build-run.sh & \
-  cd ../laravel && ../laravel/build-run.sh & \
-  cd ../angular && ../angular/build-run.sh && fg
+  cd ../angular && ../angular/build-run.sh & \
+  cd ../laravel && ../laravel/build-run.sh ; fg
 
   # push 3 containers in multi-tasking 
-  echo "tagging and push to github ..."
+  echo "tagging and push to dockerhub ..."
   cat ~/docker-hahlabs-access-key.txt | docker login --username hahlabs --password-stdin
   cd ../mysql && ../scripts/docker-tag.sh $2 push & \
   cd ../laravel &&   ../scripts/docker-tag.sh $2 push & \
