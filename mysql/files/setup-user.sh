@@ -9,6 +9,6 @@ useradd --home-dir /home/hahlabs --gid 15268 --uid 15268 --groups sudo,mysql hah
 usermod -aG sudo root  
 echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers 
 chown -R hahlabs:hahlabs /home/hahlabs 
-cat 'hahlabs:Hahlabs!123' | chpasswd 
-cat 'root:Root!123' | chpasswd 
-cat 'mysql:MySql!123' | chpasswd 
+echo 'hahlabs:Hahlabs!123' | chpasswd 
+echo 'root:Root!123' | chpasswd 
+echo 'mysql:MySql!123' | chpasswd 

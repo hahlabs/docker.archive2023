@@ -11,7 +11,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdat
 # Setup ops user use defaults uid 15286 gid 15286
 WORKDIR /home/hahlabs
 COPY files/. files/
-RUN files/setup-mysql-user.sh \
+RUN files/setup-user.sh \
  && files/setup-ssh-server.sh
 
 # Adjust user root privileges, allow remote connections for root

@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdat
  # Setup home directory workspace
 WORKDIR /home/hahlabs
 COPY files/. files/
-RUN files/setup-hahlabs-user.sh \
+RUN files/setup-user.sh \
    && files/setup-nginx-virtual-host.sh \
    && files/setup-ssh-server.sh 
 
