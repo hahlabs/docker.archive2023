@@ -37,6 +37,7 @@ if [  "$1" = 'build' ]
    ../aws-ecs/import-docker-image.sh
 fi
 cd $DOCKER_DIR/aws-ecs
+mkdir output
 ./hahlabs-create-task-def.sh
 # Check the exit status of the cp command
 status=$?

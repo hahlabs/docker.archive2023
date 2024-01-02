@@ -1,7 +1,7 @@
 docker logout
 docker rm -f $(docker ps -aq)
 docker image rm -f $(docker images -q)
-cat /projects/docker-hahlabs-access-key.txt| docker login --username hahlabs --password-stdin
+cat ~/docker-hahlabs-access-key.txt| docker login --username hahlabs --password-stdin
 docker pull -q hahlabs/mysql:dev & \
 docker pull -q hahlabs/laravel:dev & \
 docker pull -q hahlabs/angular:dev  && fg
