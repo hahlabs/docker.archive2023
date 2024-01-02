@@ -25,7 +25,8 @@ RUN files/setup-hahlabs-user.sh \
 
 USER hahlabs
 # Install nvm, load it, and install node --lts
-RUN files/install-nvm.sh
+RUN files/install-nvm.sh 
+
 # Install Angular using npm, and print version
 
 RUN files/install-angular.sh
