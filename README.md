@@ -29,3 +29,8 @@ docker run -dit \
 
  docker exec -it `docker ps | sed -n /$CONTAINER_NAME/p  | sed -e 's/\(^[[:xdigit:]]\{12\}\).*$/\1/g'` /bin/bash
  docker exec -it $CONTAINER_NAME /bin/bash
+
+ Bash Append:
+ 1. >> operator : echo -e "bla bla \n New line here" > file1.txt
+ 2. tee -a file1.txt file2.txt ... 
+ 3. to eliminate input or output use /dev/null : cat file1.txt > /dev/null < /dev/null
