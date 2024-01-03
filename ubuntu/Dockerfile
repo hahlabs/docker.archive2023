@@ -13,7 +13,9 @@ WORKDIR /home/hahlabs
 COPY common-files/. common-files/
 
 RUN common-files/setup-user.sh \
- && common-files/setup-ssh-server.sh
+ && common-files/setup-ssh-server.sh \
+ && rm -rf common-files \
+ && chown -R hahlabs:hahlabs /home/hahlabs 
 
 # Adjust user root privileges, allow remote connections for root
 

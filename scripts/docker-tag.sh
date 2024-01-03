@@ -9,12 +9,16 @@
 # 4. if command "push" was provided; it pushes it to the docker registry both target tag and dev (you need to login first)
 
 . .env
+echo "Tagging container: " $CONTAINER_NAME $IMAGE_TAG 
 docker tag $DOCKER_ID/$IMAGE_NAME:wip $DOCKER_ID/$IMAGE_NAME:$1
 docker tag $DOCKER_ID/$IMAGE_NAME:wip $DOCKER_ID/$IMAGE_NAME:dev
-echo "tagged " $DOCKER_ID/$IMAGE_NAME:$1 " and " $DOCKER_ID/$IMAGE_NAME:dev "[ok]"
+echo "tagged " $DOCKER_ID/$IMAGE_NAME:$1 " and " $DOCKER_ID/$IMAGE_NAME:dev "[OK]"
 docker rmi -f $DOCKER_ID/$IMAGE_NAME:wip
 docker images | grep $DOCKER_ID/$IMAGE_NAME
-
- docker push  $DOCKER_ID/$IMAGE_NAME:dev
- docker push  $DOCKER_ID/$IMAGE_NAME:$1
-
+if [ "$2" == "push" ]; then
+ cat ../scripts/docker-hahlabs-access-token.txt | docker login --username hahlabs --password-stdin
+ echo "Pushing container: " $CONTAINER_NAME $IMAGE_TAG 
+ docker push -q $DOCKER_ID/$IMAGE_NAME:dev
+ docker push -q $DOCKER_ID/$IMAGE_NAME:$1
+ echo "container: " $CONTAINER_NAME $IMAGE_TAG " pushed into repository OK!"
+fi

@@ -6,7 +6,7 @@ USER root
 RUN  files/setup-mysql-user.sh \
      && service mysql restart \
      && mysql  < files/root-user.sql  \
-     && cp files/startup.sh /home/hahlabs \
+     && cp files/startup.sh /home/hahlabs && chown hahlabs:hahlabs /home/hahlabs/startup.sh \
      && rm -rf files \
      && sed -Ei 's/#Port 22/Port 8022/' /etc/ssh/sshd_config
      
