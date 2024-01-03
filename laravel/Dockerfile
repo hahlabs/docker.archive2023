@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM hahlabs/ubuntu:dev
 LABEL version.php="8.2.14" \
       version.zend="4.2.14" \
       version.ubuntu="22.04-lts" \
@@ -7,24 +7,22 @@ LABEL version.php="8.2.14" \
       version.hahlabs-laravel="alpha-00.04.06" \
       version.description="Rebuild for 22.04 & php8.x - Laravel 10.x"
 
+
 WORKDIR /home/hahlabs
 COPY files/. files/
-# Update, Upgrade, install packages, create non-admin account
-RUN apt -y update && apt -y upgrade
-# has to be after update/upgrade commands
-RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdata && ln -fs /usr/share/zoneinfo/America/Vancouver /etc/localtime
-RUN files/install-tools.sh \
-&& files/setup-user.sh \
-&& files/install-composer.sh \
-&& files/build-grpc.sh \
-&& files/setup-nginx-virtual-host.sh
-# Setup workspace
+USER root
+RUN  files/install-tools.sh \
+    && files/install-composer.sh \
+    && files/build-grpc.sh \
+    && files/setup-nginx-virtual-host.sh
+
+
+    # Setup workspace
 
 WORKDIR /home/hahlabs
 RUN cp files/startup.sh /home/hahlabs \
-    && chown hahlabs:hahlabs startup.sh \
-    && files/setup-ssh-server.sh \
-    && rm -rf files
+    && rm -rf files \
+    && sed -Ei 's/#Port 22/Port 8222/' /etc/ssh/sshd_config
 
 
 

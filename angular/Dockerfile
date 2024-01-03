@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM hahlabs/ubuntu:dev
 LABEL version.angular="17.0.8" \
       version.ubuntu="22.04-lts" \
       version.firebase="13.0.2" \
@@ -8,20 +8,14 @@ LABEL version.angular="17.0.8" \
       version.hahlabs-angular="alpha-00.04.06" \
       version.description="Ubuntu 22.04 - Angular 17"
 
+COPY files/. files/
 # Update, Upgrade, install packages
 USER root
-RUN apt -y update \
- && apt -y upgrade \
- && apt install -y nginx curl npm sudo vim openssh-server
-
-ENV TZ="America/Vancouver"
-RUN DEBIAN_FRONTEND=noninteractive TZ=America/Vancouver apt-get -y install tzdata && ln -fs /usr/share/zoneinfo/America/Vancouver /etc/localtime
- # Setup home directory workspace
+RUN apt install -y nginx curl npm 
 WORKDIR /home/hahlabs
-COPY files/. files/
-RUN files/setup-user.sh \
-   && files/setup-nginx-virtual-host.sh \
-   && files/setup-ssh-server.sh 
+
+RUN files/setup-nginx-virtual-host.sh \
+   && sed -Ei 's/#Port 22/Port 8122/' /etc/ssh/sshd_config
 
 USER hahlabs
 # Install nvm, load it, and install node --lts
@@ -34,7 +28,6 @@ RUN files/install-angular.sh
 RUN files/install-firebase.sh
 
 RUN cp files/startup.sh /home/hahlabs \
-    && chown hahlabs:hahlabs /home/hahlabs/startup.sh \
     && sudo rm -rf files
 
 # 8101 : NGINX with default virtual host to intial Angular project
