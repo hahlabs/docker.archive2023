@@ -3,11 +3,6 @@
 # build typical tag $DOCKER_ID/$IMAGE_NAME:wip
 
 . .env
-if [ -z "$1" ] 
-then 
-  IMAGE_TAG=$DOCKER_ID/$IMAGE_NAME:wip
-else
-  IMAGE_TAG=$DOCKER_ID/$IMAGE_NAME:$1
-fi
-echo "Building image:" $IMAGE_TAG
-docker buildx build -qt $IMAGE_TAG .
+
+echo "Building image:" $IMAGE_TAG:wip
+docker buildx build $DEBUG -t $IMAGE_TAG:wip .

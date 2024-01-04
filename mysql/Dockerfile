@@ -3,9 +3,9 @@ LABEL version.hahlabs-mysql="alpha-00.05.02"
 
 COPY files/. files/
 USER root
-RUN  files/setup-mysql-user.sh \
+RUN  files/setup-mysql.sh \
      && service mysql restart \
-     && mysql  < files/root-user.sql  \
+     && mysql  < files/hahlabs-user.sql  \
      && cp files/startup.sh /home/hahlabs && chown hahlabs:hahlabs /home/hahlabs/startup.sh \
      && rm -rf files \
      && sed -Ei 's/#Port 22/Port 8022/' /etc/ssh/sshd_config
