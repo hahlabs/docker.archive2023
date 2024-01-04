@@ -17,6 +17,15 @@ Highlights:
 2. hahlabs user takes uid/gid 15286 to avoid conflicts with AWS or other container operator users
 3. Upgrades to Angular 17.x, nvm, npm, firebase 13.x, MySQL 8.x, php 8.x, laravel 10.x, nginx
 
+
+# Build and deploy to TURNADO
+- $git pull
+- if scripts/docker-hahlabs-access-token.txt doesn't exist $cp ~/.ssh/docker-hahlabs-access-token.txt scripts/
+- if scripts/logs folder doesn't exist $mkdir -p scripts/logs
+- scripts/build-all.sh
+- follow progress tail -f scripts/logs/hahlabs-build-run.log
+- errors in scripts/logs/hahlabs-build-run.err
+
 # Build and Deploy to AWS ECS
 1. Configure environment variable DOCKER_DIR in aws-ecs
 2. Configure connection to AWS , aws configure
@@ -30,14 +39,13 @@ Highlights:
   4.6 create ECS service
   
 
-NOTE : do not map ports for WSL 
-docker run -dit \
-      --name $CONTAINER_NAME $IMAGE_TAG
+# Run Docker image
+- docker run -dit       --name $CONTAINER_NAME $IMAGE_TAG
 
- docker exec -it `docker ps | sed -n /$CONTAINER_NAME/p  | sed -e 's/\(^[[:xdigit:]]\{12\}\).*$/\1/g'` /bin/bash
- docker exec -it $CONTAINER_NAME /bin/bash
+- docker exec -it `docker ps | sed -n /$CONTAINER_NAME/p  | sed -e 's/\(^[[:xdigit:]]\{12\}\).*$/\1/g'` /bin/bash
+- docker exec -it $CONTAINER_NAME /bin/bash
 
- Bash Append:
- 1. >> operator : echo -e "bla bla \n New line here" > file1.txt
- 2. tee -a file1.txt file2.txt ... 
- 3. to eliminate input or output use /dev/null : cat file1.txt > /dev/null < /dev/null
+ # Bash Append:
+ 1. The >> operator : echo -e "bla bla \n New line here" > file1.txt
+ 2. tee -a file1.txt file2.txt ... : multiple files
+ 3. use /dev/null to eliminate input or output use /dev/null : cat file1.txt > /dev/null < /dev/null
