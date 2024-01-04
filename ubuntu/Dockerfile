@@ -14,6 +14,7 @@ COPY common-files/. common-files/
 
 RUN common-files/setup-user.sh \
  && common-files/setup-ssh-server.sh \
+ && cp common-files/startup.sh /home/hahlabs \
  && rm -rf common-files \
  && chown -R hahlabs:hahlabs /home/hahlabs 
 
@@ -21,4 +22,4 @@ RUN common-files/setup-user.sh \
 
 USER hahlabs
 # Enables the service on docker run container
-ENTRYPOINT sudo ./startup.sh && bash
+ENTRYPOINT sudo ./startup.sh 

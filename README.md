@@ -4,7 +4,14 @@ Docker &amp; Kubernetes factories
 Docker Login : hahlabs
 
 # Releases:
-## Alpha-00.03.01: Latest , dev
+## Alpha-00.05.02: Latest , dev Jan 4th 2024
+# Images:
+ - hahlabs/ubuntu: basic ubuntu image, foundation of all images, latest 22.04 + ssh + hahlabs user
+ - hahlabs/mysql: basic foundation of mysql server installed, root user local access only, hahlabs user allow remote access, no example schema, mysql user allow login port 3306
+ - hahlabs/laravel: basic foundation of nginx, php, laravel with grpc for GCP access, port 8201
+ - hahlabs/angular: basic foundation of nginx, angular port 8101
+
+ 
 Highlights:
 1. Updated to latest Ubuntu 22.04 and major enhancements and cleansing to Dockerfiles
 2. hahlabs user takes uid/gid 15286 to avoid conflicts with AWS or other container operator users
