@@ -5,7 +5,7 @@ LABEL version.angular="17.0.8" \
       version.nvm="0.39.7" \
       version.node.js="20.10.0-lts" \
       version.npm="10.2.3" \
-      version.hahlabs-angular="alpha-00.04.06" \
+      version.hahlabs-angular="alpha-00.05.02" \
       version.description="Ubuntu 22.04 - Angular 17"
 
 COPY files/. files/
@@ -34,4 +34,4 @@ RUN cp files/startup.sh /home/hahlabs \
 # 4200 : ng serve
 # 9005 : Debugger port
 EXPOSE 8101 4200 9005 8122
-ENTRYPOINT sudo ./startup.sh && bash
+ENTRYPOINT sudo ./startup.sh 

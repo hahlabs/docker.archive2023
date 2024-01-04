@@ -1,3 +1,2 @@
 docker-hahlabs-access-token.txt
-hahlabs-build-run.log
-hahlabs-build-run.err
+/logs/.

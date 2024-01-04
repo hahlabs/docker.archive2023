@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 LABEL version.ubuntu="22.04-lts" \
-      version.hahlabs-mysql="alpha-00.05.01"
+      version.hahlabs-mysql="alpha-00.05.02"
 # Common Layers
 # Update, Upgrade, install packages
 RUN apt -y update \

@@ -1,2 +1,3 @@
-sudo service ssh start
-sudo service nginx start
+service ssh start
+service nginx start
+tail -f /dev/null

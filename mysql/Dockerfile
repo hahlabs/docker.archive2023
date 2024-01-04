@@ -1,5 +1,5 @@
 FROM hahlabs/ubuntu:dev
-LABEL version.hahlabs-mysql="alpha-00.05.01"
+LABEL version.hahlabs-mysql="alpha-00.05.02"
 
 COPY files/. files/
 USER root
@@ -15,4 +15,4 @@ USER hahlabs
 
 EXPOSE 3306 8022
 # Enables the service on docker run container
-ENTRYPOINT sudo ./startup.sh && bash
+ENTRYPOINT sudo ./startup.sh 

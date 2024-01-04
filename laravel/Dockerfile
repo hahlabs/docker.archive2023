@@ -4,7 +4,7 @@ LABEL version.php="8.2.14" \
       version.ubuntu="22.04-lts" \
       version.grpc="1.60.0" \
       version.composer="2.6.6" \
-      version.hahlabs-laravel="alpha-00.04.06" \
+      version.hahlabs-laravel="alpha-00.05.02" \
       version.description="Rebuild for 22.04 & php8.x - Laravel 10.x"
 
 
@@ -35,5 +35,5 @@ USER hahlabs
 # 8210 : php artisan serve --host=0.0.0.0 --port=8210 || php -S 0.0.0.0:8210 
 # 9003 : XDebugger, internal should not be exposed, VSCode will report port in use error if exposed
 EXPOSE  8201 8210 8222 
-ENTRYPOINT sudo ./startup.sh  && bash
+ENTRYPOINT sudo ./startup.sh  
 
