@@ -11,4 +11,4 @@ echo "Building docker container: " $CONTAINER_NAME $IMAGE_TAG
 ../scripts/docker-tag.sh $TAG 
 
 echo  $CONTAINER_NAME $IMAGE_TAG " Built [OK]"
-if [ -z ${DEBUG+x} ]; then ./test-image.sh; else echo "skip test image."; fi
+if [ ! -z ${DEBUG+x} ]; then ./test-image.sh; else echo "skip test image."; fi
